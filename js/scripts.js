@@ -1,3 +1,5 @@
+
+
 let pokemonList = [
 { 
     name: 'Bulbasaur',
@@ -28,11 +30,34 @@ let pokemonList = [
     category: 'freeze'
 },
 {
+    name: 'Pikachu',
+    type: ['electric'],
+    height: 1.04,
+    weight: 13.2,
+    category: 'mouse'   
+},
+{
+    name: 'Larvitar',
+    type: ['rock' , 'ground'],
+    height: 2.0,
+    weight: 158.7,
+    category: 'rock skin'
+},
+{
     name: 'Dragonite',
     type: ['dragon' , 'flying'],
     height: 7.03,
     weight: 463,
-    category: 'dragon'
+    category: 'dragon' 
 }
 
 ]
+
+for (let i=0; i < pokemonList.length; i++){
+    if (pokemonList[i].height <6 && pokemonList[i].height >0.6){
+      document.write("<div>" + pokemonList[i].name + pokemonList[i].height + "" + "</div>)");
+    
+    }else {
+      document.write("<div>" + pokemonList[i].name + pokemonList[i].height + " Wow, that its Big!" + "</div>");
+    }
+  }
