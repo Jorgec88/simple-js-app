@@ -86,3 +86,8 @@ document.write(pokemon.name + " : " + pokemon.height + "<br>");
 pokemonRepository.add();
 });
 
+Object.keys(pokemonRepository).forEach(function(property) {
+    console.log(pokemonRepository[property]);
+  });
+
+
