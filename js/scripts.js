@@ -53,11 +53,19 @@ let pokemonList = [
 
 ]
 
-for (let i=0; i < pokemonList.length; i++){
-    if (pokemonList[i].height <6 && pokemonList[i].height >0.6){
-      document.write("<div>" + pokemonList[i].name + pokemonList[i].height + "" + "</div>)");
+//for (let i=0; i < pokemonList.length; i++){
+   //if (pokemonList[i].height <6 && pokemonList[i].height >0.6){
+    //  document.write(pokemonList[i].name + " : " + pokemonList[i].height + "" + "<br>");
     
-    }else {
-      document.write("<div>" + pokemonList[i].name + pokemonList[i].height + " Wow, that its Big!" + "</div>");
-    }
-  }
+    //} else { 
+        
+     // document.write(pokemonList[i].name + " : " + pokemonList[i].height + " Wow, that its Big!" + "<br>");
+    //}
+  //}
+  
+  
+pokemonList.forEach(function(pokemon) {
+document.write(pokemon.name + " : " + pokemon.height + "<br>");
+});
+
+      
