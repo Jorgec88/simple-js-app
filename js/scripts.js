@@ -1,54 +1,54 @@
 
 let pokemonRepository = (function () {
-let pokemonList = [
+let repository = [
 { 
-    name: 'Bulbasaur',
-    type: ['grass' , 'poison'],
+    name: "Bulbasaur",
+    type: ["grass" , "poison"],
     height: 2.04,
     weight: 15.2,
-    category: 'seed'
+    category: "seed"
 },
 {
-    name: 'Charizard',
-    type: ['fire' , 'flying'],
+    name: "Charizard",
+    type: ["fire" , "flying"],
     height: 5.07,
     weight: 199.5,
-    category: 'flame'
+    category: "flame"
 },
 {
-    name: 'Alakazam',
-    type: ['psychic'],
+    name: "Alakazam",
+    type: ["psychic"],
     height: 4.11,
     weight: 105.8,
-    category: 'psi'
+    category: "psi"
 },
 {
-    name: 'Articuno',
-    type: ['ice' , 'flying'],
+    name: "Articuno",
+    type: ["ice" , "flying"],
     height: 5.07,
     weight: 122.1,
-    category: 'freeze'
+    category: "freeze"
 },
 {
-    name: 'Pikachu',
-    type: ['electric'],
+    name: "Pikachu",
+    type: ["electric"],
     height: 1.04,
     weight: 13.2,
-    category: 'mouse'   
+    category: "mouse"   
 },
 {
-    name: 'Larvitar',
-    type: ['rock' , 'ground'],
+    name: "Larvitar",
+    type: ["rock" , "ground"],
     height: 2.0,
     weight: 158.7,
-    category: 'rock skin'
+    category: "rock skin"
 },
 {
-    name: 'Dragonite',
-    type: ['dragon' , 'flying'],
+    name: "Dragonite",
+    type: ["dragon" , "flying"],
     height: 7.03,
     weight: 463,
-    category: 'dragon' 
+    category: "dragon" 
 },
 
 ];
@@ -62,16 +62,16 @@ let pokemonList = [
         "weight" in pokemon &&
         "category" in pokemon 
         ) {
-        pokemonList.push(pokemon);
+        repository.push(pokemon);
     } else {
         console.log("incorrect pokemon");
     }
 }
  function getAll(){
-        return pokemonList;
+        return repository;
     }
  function addListItem(pokemom) {
-        let pokemonList = document.querySelector('.pokemon-list');
+        let pokemonList = document.querySelector(".pokemon-list");
         let listItem = document.createElement("li");
         let button = document.createElement("button");
         button.innerText = pokemon.name;
@@ -88,8 +88,9 @@ return {
     
  })();
 
-console.log(pokemonRepository.getAll()); 
-pokemonRepository.add({ name: 'charmander' });
+
+pokemonRepository.add({ name: "charmander", type: ["psychic"],
+height: 4.11, weight: 105.8, category: "psi" });
 console.log(pokemonRepository.getAll());
 
 pokemonRepository.getAll().forEach(function(pokemon) {
@@ -117,5 +118,4 @@ pokemonRepository.getAll().forEach(function(pokemon) {
 //Object.keys(pokemonRepository).forEach(function(property) {
   //  console.log(pokemonRepository[property]);
   //});
-
- //
+//  console.log(pokemonRepository.getAll()); 
