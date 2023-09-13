@@ -46,6 +46,27 @@ let pokemonRepository = (function () {
       }).catch(function (e) {
         console.error(e);
       })
+      
+      let message = document.querySelector('.message');
+
+      let showLoadingMessage = document.querySelector('.show-loading-message');
+      
+      let hideLoadingMessage = document.querySelector('.hide-loading-message');
+      
+      showLoadingMessage.addEventListener('submit', function(event){
+        message.classList.add('visible');
+        event.target.classList.remove('visible');
+        hideLoadingMessage.classList.add('visible');
+     
+    });
+      
+    hideLoadingMessage.addEventListener('submit', function(){
+       message.classList.remove('visible');
+        event.target.classList.remove('visible');
+        showLoadingMessage.classList.add('visible');
+      });
+
+
     }
   
     function loadDetails(item) {
