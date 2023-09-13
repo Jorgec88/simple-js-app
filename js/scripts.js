@@ -1,109 +1,91 @@
 
 let pokemonRepository = (function () {
-let repository = [
-{ 
-    name: "Bulbasaur",
-    type: ["grass" , "poison"],
-    height: 2.04,
-    weight: 15.2,
-    category: "seed"
-},
-{
-    name: "Charizard",
-    type: ["fire" , "flying"],
-    height: 5.07,
-    weight: 199.5,
-    category: "flame"
-},
-{
-    name: "Alakazam",
-    type: ["psychic"],
-    height: 4.11,
-    weight: 105.8,
-    category: "psi"
-},
-{
-    name: "Articuno",
-    type: ["ice" , "flying"],
-    height: 5.07,
-    weight: 122.1,
-    category: "freeze"
-},
-{
-    name: "Pikachu",
-    type: ["electric"],
-    height: 1.04,
-    weight: 13.2,
-    category: "mouse"   
-},
-{
-    name: "Larvitar",
-    type: ["rock" , "ground"],
-    height: 2.0,
-    weight: 158.7,
-    category: "rock skin"
-},
-{
-    name: "Dragonite",
-    type: ["dragon" , "flying"],
-    height: 7.03,
-    weight: 463,
-    category: "dragon" 
-},
-
-];
-
- function add(pokemon) {
-    if (
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  
+    function add(pokemon) {
+      if (
         typeof pokemon === "object" &&
         "name" in pokemon &&
         "height" in pokemon &&
-        "type" in pokemon &&
-        "weight" in pokemon &&
-        "category" in pokemon 
-        ) {
-        repository.push(pokemon);
-    } else {
+        "type" in pokemon
+      ) {
+        pokemonList.push(pokemon);
+      } else {
         console.log("incorrect pokemon");
+      }
     }
-}
- function getAll(){
-        return repository;
+    function getAll() {
+      return pokemonList;
     }
- function addListItem(pokemom) {
-        let pokemonList = document.querySelector(".pokemon-list");
-        let listItem = document.createElement("li");
-        let button = document.createElement("button");
-        button.innerText = pokemon.name;
-        button.classList.add("button-class");
-        button.addEventListener("click", function(event){
-         showDetails(pokemon);
-        listItem.appendChild(button);
-        pokemonList.appendChild(listItem);  
+    function addListItem(pokemon) {
+      let pokemonList = document.querySelector(".pokemon-list");
+      let listpokemon = document.createElement("li");
+      let button = document.createElement("button");
+      button.innerText = pokemon.name;
+      button.classList.add("button-class");
+      listpokemon.appendChild(button);
+      pokemonList.appendChild(listpokemon);
+      button.addEventListener("click", function(event) {
+        showDetails(pokemon);
+      });
     }
-function showDetails(pokemon) {
- console.log(pokemon);
-}  
- }
-return {
-        add: add,
-        getAll: getAll,
-        addListItem: addListItem,
-        showDetails: showDetails,
-     };
+  
+    function loadList() {
+      return fetch(apiUrl).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
+          console.log(pokemon);
+        });
+      }).catch(function (e) {
+        console.error(e);
+      })
+    }
+  
+    function loadDetails(item) {
+      let url = item.detailsUrl;
+      return fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (details) {
+        // Now we add the details to the item
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+      }).catch(function (e) {
+        console.error(e);
+      });
+    }
+  
+    function showDetails(item) {
+      pokemonRepository.loadDetails(item).then(function () {
+        console.log(item);
+      });
+    }
+  
+    return {
+      add: add,
+      getAll: getAll,
+      addListItem: addListItem,
+      loadList: loadList,
+      loadDetails: loadDetails,
+      showDetails: showDetails
+    };
+  })();
+  
+  
+  pokemonRepository.loadList().then(function () {
     
- })();
-
-
-pokemonRepository.add({ name: "charmander", type: ["psychic"],
-height: 4.11, weight: 105.8, category: "psi" });
-console.log(pokemonRepository.getAll());
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-    pokemonRepository.addListItem(pokemon);
-        
+    pokemonRepository.getAll().forEach(function (pokemon) {
+      pokemonRepository.addListItem(pokemon);
     });
-
+  });
+  
 
 //for (let i=0; i < pokemonList.length; i++){
    //if (pokemonList[i].height <6 && pokemonList[i].height >0.6){
@@ -125,3 +107,32 @@ pokemonRepository.getAll().forEach(function(pokemon) {
   //  console.log(pokemonRepository[property]);
   //});
 //  console.log(pokemonRepository.getAll()); 
+
+//{ 
+  //  name: "Bulbasaur",
+    //type: ["grass" , "poison"],
+    //height: 2.04,
+    //weight: 15.2,
+    //category: "seed"
+//},
+//{
+  //  name: "Charizard",
+   // type: ["fire" , "flying"],
+    //height: 5.07,
+    //weight: 199.5,
+    //category: "flame"
+//},
+//{
+  //  name: "Alakazam",
+    //type: ["psychic"],
+    //height: 4.11,
+    //weight: 105.8,
+    //category: "psi"
+//},
+//{
+  //  name: "Articuno",
+    //type: ["ice" , "flying"],
+    //height: 5.07,
+    //weight: 122.1,
+    //category: "freeze"
+//},
