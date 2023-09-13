@@ -76,14 +76,20 @@ let repository = [
         let button = document.createElement("button");
         button.innerText = pokemon.name;
         button.classList.add("button-class");
+        button.addEventListener("click", function(event){
+         showDetails(pokemon);
         listItem.appendChild(button);
         pokemonList.appendChild(listItem);  
     }
-
+function showDetails(pokemon) {
+ console.log(pokemon);
+}  
+ }
 return {
         add: add,
         getAll: getAll,
-        addListItem: addListItem 
+        addListItem: addListItem,
+        showDetails: showDetails,
      };
     
  })();
