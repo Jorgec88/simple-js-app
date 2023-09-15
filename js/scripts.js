@@ -8,7 +8,7 @@ let pokemonRepository = (function () {
         typeof pokemon === "object" &&
         "name" in pokemon &&
         "height" in pokemon &&
-        "type" in pokemon
+        "types" in pokemon
       ) {
         pokemonList.push(pokemon);
       } else {
@@ -46,28 +46,8 @@ let pokemonRepository = (function () {
       }).catch(function (e) {
         console.error(e);
       })
-      
-      let message = document.querySelector('.message');
 
-      let showLoadingMessage = document.querySelector('.show-loading-message');
-      
-      let hideLoadingMessage = document.querySelector('.hide-loading-message');
-      
-      showLoadingMessage.addEventListener('submit', function(event){
-        message.classList.add('visible');
-        event.target.classList.remove('visible');
-        hideLoadingMessage.classList.add('visible');
-     
-    });
-      
-    hideLoadingMessage.addEventListener('submit', function(){
-       message.classList.remove('visible');
-        event.target.classList.remove('visible');
-        showLoadingMessage.classList.add('visible');
-      });
-
-
-    }
+     }
   
     function loadDetails(item) {
       let url = item.detailsUrl;
@@ -82,12 +62,64 @@ let pokemonRepository = (function () {
         console.error(e);
       });
     }
+
+    function hideModal() {
+        let pokemonContainer = document.querySelector("#modal-container");
+        pokemonContainer.classList.remove("is-visible");
+
+    }
   
     function showDetails(item) {
-      pokemonRepository.loadDetails(item).then(function () {
-        console.log(item);
+      pokemonRepository.loadDetails(pokemon).then(function () {
+        console.log(pokemon);
+    
+    let pokemonContainer = document.querySelector("#modal-container");
+     pokemonContainer.innerHtml ="";
+
+     let modal = document.createElement("div");
+      modal.classList.add("modal");
+
+      let closeButtonElement = document.createElement("button");
+      closeButtonElement.classList.ass("modal-close");
+      closeButtonElement.innerText = "close";
+      closeButtonElement.addEventListener("click", hidemodal);
+
+      let titleElement = document.createElement("h1");
+      titleElement.innerText = pokemon.name;
+
+      let contentElementh = document.createElement("p");
+      contentElement.innerText = height + ":" + pokemon.height;
+
+      let contentElementt = document.createElement("p");
+      contentElement.innerText = types + ":" + pokemon.types;
+
+      let imageElement = document.createElement("img");
+      imageElement.src = pokemon.imageUrl;
+
+      modal.appendChild(closeButtonElement);
+      
+      modal.appendChild(titleElementElement);
+      modal.appendChild(contentElementh);
+      modal.appendChild(contentElementt);
+      modal.appendChild(closeButtonElement);
+      modal.appendChild(imageElement);
+      pokemonContainer.appendChild(modal);
+
+    pokemonContainer.classList.add("is-visible");
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pokemonContainer.classList.contains('is-visible')) {
+          hideModal();
+     }
+  });
+
+      pokemonContainer.addEventListener('click', (e) => {
+        let target = e.target;
+        if (target === pokemonContainer) {
+          hideModal();
+        }
       });
-    }
+        
   
     return {
       add: add,
@@ -95,9 +127,11 @@ let pokemonRepository = (function () {
       addListItem: addListItem,
       loadList: loadList,
       loadDetails: loadDetails,
-      showDetails: showDetails
+      showDetails: showDetails,
+      hideModal: hideModal,
     };
-  })();
+
+   })();
   
   
   pokemonRepository.loadList().then(function () {
@@ -107,6 +141,39 @@ let pokemonRepository = (function () {
     });
   });
   
+// email validation and password
+  //function validateEmail() {
+    //let value = emailImput.value;
+    //let hasAtSign = value.indexOf("@") > -1;
+    //let hasDot = value.indexOf(".") > -1;
+    //return value && hasAtSign && hasDot;
+  //}
+  
+  //function validatePassword() {
+    //  let value = passwordImput.value;
+      //return value && value.lenght >=8;
+  //}
+
+
+ // let message = document.querySelector('.message');
+
+  //let showLoadingMessage = document.querySelector('.show-loading-message');
+  
+  //let hideLoadingMessage = document.querySelector('.hide-loading-message');
+  
+  //showLoadingMessage.addEventListener('submit', function(event){
+    //message.classList.add('visible');
+    //event.target.classList.remove('visible');
+    //hideLoadingMessage.classList.add('visible');
+ 
+//});
+  
+//hideLoadingMessage.addEventListener('submit', function(){
+  // message.classList.remove('visible');
+    //event.target.classList.remove('visible');
+    //showLoadingMessage.classList.add('visible');
+  //});
+
 
 //for (let i=0; i < pokemonList.length; i++){
    //if (pokemonList[i].height <6 && pokemonList[i].height >0.6){
