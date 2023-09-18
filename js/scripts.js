@@ -7,8 +7,7 @@ let pokemonRepository = (function () {
       if (
         typeof pokemon === "object" &&
         "name" in pokemon &&
-        "height" in pokemon &&
-        "types" in pokemon
+        "detailsUrl" in pokemon 
       ) {
         pokemonList.push(pokemon);
       } else {
@@ -72,7 +71,7 @@ let pokemonRepository = (function () {
     function showDetails(item) {
       pokemonRepository.loadDetails(pokemon).then(function () {
         console.log(pokemon);
-    
+      
     let pokemonContainer = document.querySelector("#modal-container");
      pokemonContainer.innerHtml ="";
 
