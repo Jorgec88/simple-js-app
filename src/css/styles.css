@@ -1,8 +1,11 @@
 
+
+
+
 .button-class {
     background-color: #4caf50; /* Green */
     border: none;
-    color: white;
+    color: rgb(8, 0, 0);
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
@@ -12,13 +15,21 @@
     
 }
 
+
+  
+
+
 html, 
 body {
   font-family: Arial, sans-serif;
+  background-color: rgb(248, 238, 225);
 }
+
+
 
 #modal-container, #exampleModal {
   display: none;
+  background-color: rgb(18, 25, 25);
 }
 
 #modal-container.is-visible {
@@ -46,11 +57,12 @@ body {
   margin: auto;
   display: inline-block;
   box-sizing: border-box;
-  background: #fff;
+  background: #e09494;
   padding: 15px;
   width: 100%;
   max-width: 700px;
   text-align: left;
+  background-color: rgb(18, 24, 22);
 }
 
 .modal-close {
@@ -68,3 +80,24 @@ body {
 .modal p {
   margin-bottom: 0;
 }
+
+#page-intro {
+	padding-top: 15vh;
+	text-align: center;
+}
+
+
+
+
+.contact-page {
+  clear: both;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+

@@ -53,6 +53,7 @@ let pokemonRepository = (function () {
       $("#list").sortable();
     }
 
+    
     button.classList.add("btn", "btn-primary", "btn-lg");
     button.setAttribute("data-target", "#exampleModal");
     button.setAttribute("data-toggle", "modal");
